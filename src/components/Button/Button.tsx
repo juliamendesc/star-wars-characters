@@ -6,6 +6,7 @@ type ButtonProps = {
 	ariaLabel?: string;
 	type?: React.ButtonHTMLAttributes<HTMLButtonElement>['type'];
 	children?: React.ReactNode;
+	className?: string;
 };
 
 export default function Button({
@@ -14,12 +15,13 @@ export default function Button({
 	ariaLabel,
 	type = 'button',
 	children,
+	className
 }: ButtonProps) {
 	return (
 		<button
 			type={type}
 			onClick={onClick}
-			className='text-white bg-transparent focus:outline-none'
+			className={`focus:outline-none ${className}` }
 			aria-label={ariaLabel}
 			aria-pressed='false'>
 			{Icon && <Icon className='h-6 w-6' />}

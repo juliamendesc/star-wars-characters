@@ -1,20 +1,20 @@
 import React, { useContext } from 'react';
-import SearchIcon from '../../assets/icons/search';
-import Button from '../Button/Button';
-import { CharactersContext } from '../../context/CharactersContext';
+import { CharactersContext } from 'src/context/CharactersContext';
+import Button from 'src/components/Button/Button';
+import SearchIcon from 'src/assets/icons/search';
 
 export default function SearchBar() {
-	const { handleSearchChange, handleCharacterSearch } = useContext(CharactersContext);;
-
+	const { searchTerm, handleSearchChange, handleCharacterSearch } =
+		useContext(CharactersContext);
 
 	function handleSearchKeyUp(e: React.KeyboardEvent<HTMLInputElement>) {
 		if (e.key === 'Enter') {
-			handleCharacterSearch()
+			handleCharacterSearch();
 		}
 	}
 
 	function handleSearchClick() {
-		handleCharacterSearch()
+		handleCharacterSearch();
 	}
 
 	return (
@@ -29,6 +29,7 @@ export default function SearchBar() {
 				aria-label='Search input'
 				role='searchbox'
 				onChange={handleSearchChange}
+				value={searchTerm}
 			/>
 			<Button type='submit' icon={SearchIcon} onClick={handleSearchClick} />
 		</div>

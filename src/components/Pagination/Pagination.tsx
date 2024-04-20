@@ -1,33 +1,86 @@
-import React from 'react';
-import ChevronLeft from '../../assets/icons/chevron-left';
-import ChevronRight from '../../assets/icons/chevron-right';
-import { API_Response } from '../../types/types';
+import React, { useContext } from 'react';
+import ChevronLeft from 'src/assets/icons/chevron-left';
+import ChevronRight from 'src/assets/icons/chevron-right';
+import { CharactersContext } from 'src/context/CharactersContext';
 
-export default function Pagination(response: API_Response) {
-	const { count, next, previous } = response;
+export default function Pagination() {
+	const { response, fetchPage, currentPage, setCurrentPage } =
+		useContext(CharactersContext);
+	const { count, previous, next } = response;
+	const recordsPerPage = 10;
+	const totalPages = Math.ceil(count / recordsPerPage);
+
+	const handlePageClick = (pageNumber: number) => {
+		fetchPage(pageNumber);
+		setCurrentPage(pageNumber);
+	};
+
+	// Generate page numbers
+	let pages = [];
+	for (let i = 1; i <= totalPages; i++) {
+		pages.push(i);
+	}
+
+	const startIndex = (currentPage - 1) * recordsPerPage + 1;
+	const endIndex = Math.min(startIndex + recordsPerPage - 1, count);
+
+	// Determine which pages to display
+	let pagesToShow = [];
+
+	if (totalPages <= 5) {
+		for (let i = 1; i <= totalPages; i++) {
+			pagesToShow.push(i);
+		}
+	} else {
+		// Always include the first page
+		pagesToShow.push(1);
+
+		// Handle ellipsis and pages around the current page
+		const startPage = Math.max(2, currentPage - 1);
+		const endPage = Math.min(currentPage + 1, totalPages - 1);
+
+		if (startPage > 2) {
+			pagesToShow.push('...');
+		}
+
+		for (let i = startPage; i <= endPage; i++) {
+			pagesToShow.push(i);
+		}
+
+		if (endPage < totalPages - 1) {
+			pagesToShow.push('...');
+		}
+
+		// Always include the last page
+		pagesToShow.push(totalPages);
+	}
 
 	return (
-		<div className='flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6'>
+		<div className='flex items-center justify-between border-t border-gray-200 px-4 py-3 sm:px-6'>
 			<div className='flex flex-1 justify-between sm:hidden'>
-				<a
-					href={previous || '#'}
+				<button
+					onClick={() => previous && handlePageClick(currentPage - 1)}
+					disabled={!previous}
 					className='relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50'>
-					Previous
-				</a>
-				<a
-					href={next || '#'}
+					<ChevronLeft />
+					<span>Previous</span>
+				</button>
+				<button
+					onClick={() => next && handlePageClick(currentPage + 1)}
+					disabled={!next}
 					className='relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50'>
-					Next
-				</a>
+					<ChevronRight />
+					<span>Next</span>
+				</button>
 			</div>
 			<div className='hidden sm:flex sm:flex-1 sm:items-center sm:justify-between'>
 				{count && (
 					<div>
 						<p className='text-sm text-gray-700'>
 							Showing
-							<span className='font-medium'> 1 </span>
+							<span className='font-medium'> {startIndex} </span>
 							to
-							<span className='font-medium'> 10 </span>
+							<span className='font-medium'> {endIndex} </span>
 							of
 							<span className='font-medium'> {count} </span>
 							results
@@ -38,56 +91,44 @@ export default function Pagination(response: API_Response) {
 					<nav
 						className='isolate inline-flex -space-x-px rounded-md shadow-sm'
 						aria-label='Pagination'>
-						<a
-							href={previous || '#'}
-							className='relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0'>
-							<span className='sr-only'>Previous</span>
+						<button
+							onClick={() => handlePageClick(currentPage - 1)}
+							disabled={currentPage === 1}
+							className='relative inline-flex items-center rounded-l-md border border-gray-300 bg-white px-2 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50'>
 							<ChevronLeft />
-						</a>
-						{/* Current: "z-10 bg-indigo-600 text-white focus-visible:outline
-						focus-visible:outline-2 focus-visible:outline-offset-2
-						focus-visible:outline-indigo-600", Default: "text-gray-900 ring-1
-						ring-inset ring-gray-300 hover:bg-gray-50 focus:outline-offset-0" */}
-						<a
-							href={next || '#'}
-							aria-current='page'
-							className='relative z-10 inline-flex items-center bg-indigo-600 px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'>
-							1
-						</a>
-						<a
-							href='#'
-							className='relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0'>
-							2
-						</a>
-						<a
-							href='#'
-							className='relative hidden items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 md:inline-flex'>
-							3
-						</a>
-						<span className='relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-700 ring-1 ring-inset ring-gray-300 focus:outline-offset-0'>
-							...
-						</span>
-						<a
-							href='#'
-							className='relative hidden items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 md:inline-flex'>
-							8
-						</a>
-						<a
-							href='#'
-							className='relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0'>
-							9
-						</a>
-						<a
-							href='#'
-							className='relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0'>
-							10
-						</a>
-						<a
-							href={next || '#'}
-							className='relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0'>
-							<span className='sr-only'>Next</span>
+							<span className='sr-only'>Previous</span>
+						</button>
+						{pagesToShow.map((page) => {
+							if (page === '...') {
+								return (
+									<span
+										key={crypto.randomUUID()}
+										className='relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-700 ring-1 ring-inset ring-gray-300'>
+										{page}
+									</span>
+								);
+							} else {
+								return (
+									<button
+										key={crypto.randomUUID()}
+										onClick={() => handlePageClick(page as number)}
+										className={`relative inline-flex items-center px-4 py-2 text-sm font-semibold ${
+											currentPage === page
+												? 'bg-indigo-600 text-white'
+												: 'text-gray-900 hover:bg-gray-50'
+										} ring-1 ring-inset ring-gray-300 focus:z-20 focus:outline-offset-0`}>
+										{page}
+									</button>
+								);
+							}
+						})}
+						<button
+							onClick={() => handlePageClick(currentPage + 1)}
+							disabled={currentPage === totalPages}
+							className='relative inline-flex items-center rounded-r-md border border-gray-300 bg-white px-2 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50'>
 							<ChevronRight />
-						</a>
+							<span className='sr-only'>Next</span>
+						</button>
 					</nav>
 				</div>
 			</div>

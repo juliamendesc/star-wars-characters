@@ -1,15 +1,16 @@
 import React, { Suspense } from 'react';
-import SearchBar from './components/SearchBar/SearchBar';
-import Table from './components/Table/Table';
-import Loader from './components/Loader/Loader';
-import { CharactersProvider } from './context/CharactersContext';
+import SearchBar from 'src/components/SearchBar/SearchBar';
+import Table from 'src/components/Table/Table';
+import Loader from 'src/components/Loader/Loader';
+import { CharactersProvider } from 'src/context/CharactersContext';
+import ResetButton from 'src/components/Button/ResetButton';
 
 function App() {
 	return (
 		<CharactersProvider>
+			<ResetButton />
 			<Suspense fallback={<Loader />}>
-				<SearchBar
-				/>
+				<SearchBar />
 				<Table />
 			</Suspense>
 		</CharactersProvider>

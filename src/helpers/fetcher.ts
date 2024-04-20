@@ -1,10 +1,13 @@
-import { BASE_URL } from '../types/constants';
-import { API_Response } from '../types/types';
+import { BASE_URL } from 'src/types/constants';
+import { API_Response } from 'src/types/types';
 
-export const fetcher = async (
-	page = 0,
+export const fetcher = async ({
+	page = 1,
 	nameQuery = '',
-): Promise<API_Response | undefined> => {
+}: {
+	page?: number;
+	nameQuery?: string;
+}): Promise<API_Response | undefined> => {
 	try {
 		let url = `${BASE_URL}/people/`;
 		if (!!page) url += `?page=${page}`;
