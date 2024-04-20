@@ -1,54 +1,71 @@
 import React from 'react';
-import Alert from '../../assets/icons/alert';
-import Button from '../Button/Button';
 import CloseIcon from '../../assets/icons/close';
+import VisuallyHidden from '../VisuallyHidden/VisuallyHidden';
+import FocusLock from 'react-focus-lock';
+import { RemoveScroll } from 'react-remove-scroll';
+import { createPortal } from 'react-dom';
 
-export default function Dialog({
+const Dialog = ({
 	children,
 	onClose,
 }: {
 	children: React.ReactNode;
 	onClose: () => void;
-}) {
-	return (
-		<div
-			className='relative z-50'
-			aria-labelledby='modal-title'
-			role='dialog'
-			aria-modal='true'>
-			<div
-				className='fixed inset-0 bg-black bg-opacity-75 transition-opacity overflow-hidden pointer-events-none'
-				onClick={onClose}></div>
+}) => {
+	useEscapeKey(onClose);
 
-			<div className='fixed inset-0 z-50 overflow-y-auto'>
-				<div className='flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0'>
-					<div className='relative transform overflow-hidden rounded-lg bg-slate text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg'>
-						{/* Close button */}
-						<div className='absolute top-0 right-0 pt-4 pr-4'>
-							<Button
-								onClick={onClose}
-								icon={CloseIcon}
-								ariaLabel='Close dialog'
-							/>
-						</div>
-						<div className='bg-slate px-4 pb-4 pt-5 sm:p-6 sm:pb-4'>
-							<div className='sm:flex sm:items-start'>
-								<div className='mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-secondary-500 sm:mx-0 sm:h-10 sm:w-10'>
-									<Alert className='h-6 w-6 text-white' aria-hidden='true' />
-								</div>
-								<div className='mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left'>
-									<h3
-										className='text-lg font-heading leading-6 text-white'
-										id='modal-title'>
-										Oops!
-									</h3>
-									<p className='text-sm text-lightGray'>{children}</p>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	);
+	const modalRoot = document.querySelector('#modal-root');
+  if (!modalRoot) {
+    console.error('Modal root element not found');
+    return null; // or handle this case appropriately
+  }
+
+  return createPortal(
+    // <FocusLock returnFocus={true}>
+      <RemoveScroll>
+        <div className="fixed inset-0 grid place-content-center  p-4">
+          <div
+            className="absolute inset-0 bg-black bg-opacity-75"
+            onClick={onClose}
+          />
+          <div
+            className="relative bg-white rounded-lg p-8 max-w-full"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Dialog"
+          >
+            <button
+              className="absolute top-0 right-0 p-4 text-white -translate-y-full cursor-pointer bg-transparent border-none"
+              onClick={onClose}
+            >
+							<CloseIcon className='h-6 w-6 text-white' />
+              <VisuallyHidden>
+                Dismiss modal
+              </VisuallyHidden>
+            </button>
+            {children}
+          </div>
+        </div>
+      </RemoveScroll>,
+    // </FocusLock>,
+    modalRoot
+  );
 }
+
+function useEscapeKey(callback: ()=>void) {
+  React.useEffect(() => {
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.code === 'Escape') {
+        callback();
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [callback]);
+}
+
+export default Dialog;
