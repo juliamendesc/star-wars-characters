@@ -15,6 +15,7 @@ const Dialog = ({
 	useEscapeKey(onClose);
 
 	const modalRoot = document.querySelector('#modal-root');
+
   if (!modalRoot) {
     console.error('Modal root element not found');
     return null; // or handle this case appropriately

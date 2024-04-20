@@ -1,14 +1,25 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import SearchIcon from '../../assets/icons/search';
 import Button from '../Button/Button';
-import useCharactersList from '../../hooks/useCharactersList';
+import { CharactersContext } from '../../context/CharactersContext';
 
 export default function SearchBar() {
-	const { handleSearchKeyUp, handleSearchClick, handleSearchChange } = useCharactersList();
+	const { handleSearchChange, handleCharacterSearch } = useContext(CharactersContext);;
+
+
+	function handleSearchKeyUp(e: React.KeyboardEvent<HTMLInputElement>) {
+		if (e.key === 'Enter') {
+			handleCharacterSearch()
+		}
+	}
+
+	function handleSearchClick() {
+		handleCharacterSearch()
+	}
 
 	return (
 		<div
-			className='mx-auto flex rounded-3xl p-2 bg-slate text-lightGray w-1/4 items-center justify-between gap-4 mt-10'
+			className='mx-auto flex rounded-3xl p-2 bg-slate text-lightGray items-center justify-between gap-4 mt-10 w-1/3'
 			role='search'>
 			<input
 				type='text'
