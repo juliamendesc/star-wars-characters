@@ -9,15 +9,9 @@ export default function StarWarsLogo(props: React.SVGProps<SVGSVGElement>) {
 			id='Layer_1'
 			x='0px'
 			y='0px'
-			width='693.615px'
-			height='419.375px'
 			viewBox='0 0 693.615 419.375'
-			enable-background='new 0 0 693.615 419.375'
 			xmlSpace='preserve'
 			{...props}>
-			<g id='Layer_3'>
-				<rect x='-6.084' y='-3.711' width='700.465' height='422.979' />
-			</g>
 			<g id='Layer_2'>
 				<g>
 					<path

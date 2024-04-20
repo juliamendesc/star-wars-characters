@@ -1,19 +1,21 @@
 {
-  "compilerOptions": {
+	"compilerOptions": {
+		"jsx": "react",
+    "lib": ["es6", "dom"],
+    "rootDir": ".",
+    "module": "commonjs",
     "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "strict": false,
-    "noEmit": true,
-    "incremental": true,
-    "esModuleInterop": true,
-    "module": "esnext",
+    "sourceMap": true,
     "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "jsx": "react-jsx",
-    "baseUrl": "./src"
+    "noImplicitThis": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strict": true,
+		"esModuleInterop": true,
+		"baseUrl": "./",
+    "paths": {
+      "@/*": ["./*"]
+    }
   },
   "include": ["src"],
   "exclude": ["node_modules", "eslint.config.mjs"]

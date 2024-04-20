@@ -24,6 +24,7 @@ const VisuallyHidden: React.FC<{ children: React.ReactNode }> = ({
 			};
 			window.addEventListener('keydown', handleKeyDown);
 			window.addEventListener('keyup', handleKeyUp);
+
 			return () => {
 				window.removeEventListener('keydown', handleKeyDown);
 				window.removeEventListener('keyup', handleKeyUp);

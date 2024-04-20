@@ -23,4 +23,7 @@ export const fetcher = async ({
 	} catch (error) {
 		console.error('There has been a problem with your fetch operation:', error);
 	}
+
+	return undefined; // Add a return statement to handle the case when an error occurs.
 };
+

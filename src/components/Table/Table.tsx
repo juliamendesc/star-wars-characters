@@ -10,6 +10,7 @@ export default function Table() {
 		useContext(CharactersContext);
 
 	function handleCloseDialog() {
+
 		setIsOpened(false);
 		handleSearchChange({
 			target: { value: '' },
@@ -17,7 +18,7 @@ export default function Table() {
 	}
 
 	return (
-		<div className='flex flex-col min-h-screen'>
+		<div className='flex flex-col mt-5 h-fit'>
 			{!response.count && isOpened && (
 				<Dialog onClose={handleCloseDialog}>
 					<div className='flex items-center justify-center gap-7'>

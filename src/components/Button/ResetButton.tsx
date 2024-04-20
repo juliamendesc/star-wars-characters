@@ -8,7 +8,7 @@ export default function ResetButton() {
 	return (
 		<Button
 			onClick={resetTable}
-			ariaLabel='Reset table'
+			ariaLabel='Reset table button'
 			className='my-10 absolute top-0 p-4 mx-10 bg-slate-700 rounded-md '>
 			Reset Table
 		</Button>

@@ -19,7 +19,7 @@ export default function SearchBar() {
 
 	return (
 		<div
-			className='mx-auto flex rounded-3xl p-2 bg-slate text-lightGray items-center justify-between gap-4 mt-10 w-1/3'
+			className='mx-auto flex rounded-3xl p-2 bg-slate text-lightGray items-center justify-between gap-4 mt-10 w-1/3 h-fit'
 			role='search'>
 			<input
 				type='text'
@@ -31,7 +31,7 @@ export default function SearchBar() {
 				onChange={handleSearchChange}
 				value={searchTerm}
 			/>
-			<Button type='submit' icon={SearchIcon} onClick={handleSearchClick} />
+			<Button type='submit' icon={SearchIcon} onClick={handleSearchClick} ariaLabel='Search button' />
 		</div>
 	);
 }

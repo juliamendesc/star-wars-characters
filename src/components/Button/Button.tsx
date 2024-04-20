@@ -15,7 +15,7 @@ export default function Button({
 	ariaLabel,
 	type = 'button',
 	children,
-	className
+	className = ''
 }: ButtonProps) {
 	return (
 		<button
@@ -23,6 +23,7 @@ export default function Button({
 			onClick={onClick}
 			className={`focus:outline-none ${className}` }
 			aria-label={ariaLabel}
+
 			aria-pressed='false'>
 			{Icon && <Icon className='h-6 w-6' />}
 			{children && children}
