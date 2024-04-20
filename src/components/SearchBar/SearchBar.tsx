@@ -1,13 +1,10 @@
-export default function SearchBar({
-	handleSearchChange,
-}: {
-	handleSearchChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-}) {
-	function handleKeyUp(e: React.KeyboardEvent<HTMLInputElement>) {
-		if (e.key === 'Enter') {
-			console.log('Enter key pressed');
-		}
-	}
+import React from 'react';
+import SearchIcon from '../../assets/icons/search';
+import Button from '../Button/Button';
+import useCharactersList from '../../hooks/useCharactersList';
+
+export default function SearchBar() {
+	const { handleSearchKeyUp, handleSearchClick, handleSearchChange } = useCharactersList();
 
 	return (
 		<div
@@ -17,11 +14,12 @@ export default function SearchBar({
 				type='text'
 				className='text-lightGray rounded-2xl w-full pl-3 focus:outline-none'
 				placeholder='Search for a character'
-				onKeyUp={handleKeyUp}
+				onKeyUp={handleSearchKeyUp}
 				aria-label='Search input'
 				role='searchbox'
 				onChange={handleSearchChange}
 			/>
+			<Button type='submit' icon={SearchIcon} onClick={handleSearchClick} />
 		</div>
 	);
 }
