@@ -1,6 +1,5 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-# for the sake of the example, we are not going to ignore .env files
 
 # dependencies
 /node_modules
@@ -12,6 +11,8 @@
 
 # production
 /build
+
+# for the sake of the example, we are not going to ignore .env file used
 
 # misc
 .DS_Store
