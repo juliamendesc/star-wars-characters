@@ -91,7 +91,7 @@ My main goal since I decided to transition to programming is to learn and enjoy 
 
 Once again, thank you for your time and for all Ometria's team throughout this recruiting process. I felt very welcomed and motivated to join Ometria!
 
-> For the deployed version, please visit [this]().
+> For the deployed version, please visit [this](https://star-wars-characters-86rihzdx8-juliamendescs-projects.vercel.app/).
 
 <p align="center">
 <img src=https://media.giphy.com/media/3oz8xAFtqoOUUrsh7W/giphy.gif />
