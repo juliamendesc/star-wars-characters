@@ -7,18 +7,18 @@ import ResetButton from 'src/components/Button/ResetButton';
 import StarWarsLogo from './assets/icons/star-wars-logo';
 
 function App() {
-	return (
-		<CharactersProvider>
-			<ResetButton />
-			<div className='absolute top-0 right-0 w-56 h-56'>
-				<StarWarsLogo  />
-			</div>
-			<Suspense fallback={<Loader />}>
-				<SearchBar />
-				<Table />
-			</Suspense>
-		</CharactersProvider>
-	);
+  return (
+    <CharactersProvider>
+      <ResetButton />
+      <div className="absolute top-0 right-0 w-56 h-56">
+        <StarWarsLogo />
+      </div>
+      <Suspense fallback={<Loader />}>
+        <SearchBar />
+        <Table />
+      </Suspense>
+    </CharactersProvider>
+  );
 }
 
 export default App;
