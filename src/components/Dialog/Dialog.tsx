@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { RemoveScroll } from 'react-remove-scroll';
 import { createPortal } from 'react-dom';
 import { CharactersContext } from 'src/context/CharactersContext';
@@ -12,7 +12,7 @@ const Dialog = ({
 	children: React.ReactNode;
 	onClose: () => void;
 }) => {
-	const { resetTable, isOpened } = useContext(CharactersContext);
+	const { resetTable } = useContext(CharactersContext);
 
 	useEscapeKey(onClose);
 
