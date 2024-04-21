@@ -10,8 +10,8 @@ export const fetcher = async ({
 }): Promise<API_Response | undefined> => {
 	try {
 		let url = `${BASE_URL}/people/`;
-		if (!!page) url += `?page=${page}`;
-		if (!!nameQuery) url += `&search=${encodeURIComponent(nameQuery)}`;
+		if (page) url += `?page=${page}`;
+		if (nameQuery) url += `&search=${encodeURIComponent(nameQuery)}`;
 		const response = await fetch(url);
 
 		if (!response.ok) {
@@ -26,4 +26,3 @@ export const fetcher = async ({
 
 	return undefined; // Add a return statement to handle the case when an error occurs.
 };
-

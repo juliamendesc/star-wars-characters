@@ -16,7 +16,7 @@ export default function Pagination() {
 	};
 
 	// Generate page numbers
-	let pages = [];
+	const pages = [];
 	for (let i = 1; i <= totalPages; i++) {
 		pages.push(i);
 	}
@@ -25,7 +25,7 @@ export default function Pagination() {
 	const endIndex = Math.min(startIndex + recordsPerPage - 1, count);
 
 	// Determine which pages to display
-	let pagesToShow = [];
+	const pagesToShow = [];
 
 	if (totalPages <= 5) {
 		for (let i = 1; i <= totalPages; i++) {
