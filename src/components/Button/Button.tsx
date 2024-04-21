@@ -1,10 +1,10 @@
-import React from 'react';
+import React from "react";
 
 type ButtonProps = {
   onClick: () => void;
   icon?: (props: React.SVGProps<SVGSVGElement>) => JSX.Element;
   ariaLabel?: string;
-  type?: React.ButtonHTMLAttributes<HTMLButtonElement>['type'];
+  type?: React.ButtonHTMLAttributes<HTMLButtonElement>["type"];
   children?: React.ReactNode;
   className?: string;
 };
@@ -13,9 +13,9 @@ export default function Button({
   onClick,
   icon: Icon,
   ariaLabel,
-  type = 'button',
+  type = "button",
   children,
-  className = '',
+  className = "",
 }: ButtonProps) {
   return (
     <button

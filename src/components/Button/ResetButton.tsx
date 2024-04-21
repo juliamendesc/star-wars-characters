@@ -1,6 +1,6 @@
-import React, { useContext } from 'react';
-import { CharactersContext } from 'src/context/CharactersContext';
-import Button from 'src/components/Button/Button';
+import React, { useContext } from "react";
+import { CharactersContext } from "src/context/CharactersContext";
+import Button from "src/components/Button/Button";
 
 export default function ResetButton() {
   const { resetTable } = useContext(CharactersContext);

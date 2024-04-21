@@ -4,15 +4,15 @@ import React, {
   useState,
   useEffect,
   useRef,
-} from 'react';
-import { API_Response, CharactersContextProps } from 'src/types/types';
-import { resetResponse } from 'src/types/constants';
-import { fetcher } from 'src/helpers/fetcher';
+} from "react";
+import { API_Response, CharactersContextProps } from "src/types/types";
+import { resetResponse } from "src/types/constants";
+import { fetcher } from "src/helpers/fetcher";
 
 // Create the context with a default value
 export const CharactersContext = createContext<CharactersContextProps>({
   response: resetResponse,
-  searchTerm: '',
+  searchTerm: "",
   characters: [],
   setSearchTerm: () => {},
   handleSearchChange: () => {},
@@ -32,8 +32,8 @@ export const CharactersProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [response, setResponse] = useState<API_Response>(resetResponse);
-  const [searchTerm, setSearchTerm] = useState<string>('');
-  const [characters, setCharacters] = useState<API_Response['results']>([]);
+  const [searchTerm, setSearchTerm] = useState<string>("");
+  const [characters, setCharacters] = useState<API_Response["results"]>([]);
   const [isOpened, setIsOpened] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const initialResponse = useRef<API_Response>(resetResponse);
@@ -47,7 +47,7 @@ export const CharactersProvider: React.FC<{ children: React.ReactNode }> = ({
         setCharacters(results.results);
       })
       .catch((error) => {
-        console.error('Error fetching characters:', error);
+        console.error("Error fetching characters:", error);
       });
   }, []);
 
@@ -69,18 +69,18 @@ export const CharactersProvider: React.FC<{ children: React.ReactNode }> = ({
           setResponse(fetchedResponse);
           setCharacters(fetchedResponse.results);
         } else {
-          console.log('No response received');
+          console.log("No response received");
         }
       })
       .catch((error) => {
-        console.error('Error fetching characters:', error);
+        console.error("Error fetching characters:", error);
       });
   };
 
   function resetTable() {
     setCharacters(initialResponse.current.results);
     setResponse(initialResponse.current);
-    setSearchTerm('');
+    setSearchTerm("");
     setIsOpened(false);
   }
 
@@ -97,11 +97,11 @@ export const CharactersProvider: React.FC<{ children: React.ReactNode }> = ({
           setResponse(fetchedResponse);
           setCharacters(fetchedResponse.results);
         } else {
-          console.log('No response received for the provided URL');
+          console.log("No response received for the provided URL");
         }
       })
       .catch((error) => {
-        console.error('Error fetching page:', error);
+        console.error("Error fetching page:", error);
       });
   };
 

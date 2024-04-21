@@ -1,7 +1,7 @@
-import React, { useContext } from 'react';
-import ChevronLeft from 'src/assets/icons/chevron-left';
-import ChevronRight from 'src/assets/icons/chevron-right';
-import { CharactersContext } from 'src/context/CharactersContext';
+import React, { useContext } from "react";
+import ChevronLeft from "src/assets/icons/chevron-left";
+import ChevronRight from "src/assets/icons/chevron-right";
+import { CharactersContext } from "src/context/CharactersContext";
 
 export default function Pagination() {
   const { response, fetchPage, currentPage, setCurrentPage } =
@@ -40,7 +40,7 @@ export default function Pagination() {
     const endPage = Math.min(currentPage + 1, totalPages - 1);
 
     if (startPage > 2) {
-      pagesToShow.push('...');
+      pagesToShow.push("...");
     }
 
     for (let i = startPage; i <= endPage; i++) {
@@ -48,7 +48,7 @@ export default function Pagination() {
     }
 
     if (endPage < totalPages - 1) {
-      pagesToShow.push('...');
+      pagesToShow.push("...");
     }
 
     // Always include the last page
@@ -103,7 +103,7 @@ export default function Pagination() {
               <span className="sr-only">Previous</span>
             </button>
             {pagesToShow.map((page) => {
-              if (page === '...') {
+              if (page === "...") {
                 return (
                   <span
                     key={crypto.randomUUID()}
@@ -119,8 +119,8 @@ export default function Pagination() {
                     onClick={() => handlePageClick(page as number)}
                     className={`relative inline-flex items-center px-4 py-2 text-sm font-semibold ${
                       currentPage === page
-                        ? 'bg-indigo-600 text-white'
-                        : 'text-gray-900 hover:bg-gray-50'
+                        ? "bg-indigo-600 text-white"
+                        : "text-gray-900 hover:bg-gray-50"
                     } ring-1 ring-inset ring-gray-300 focus:z-20 focus:outline-offset-0`}
                   >
                     {page}

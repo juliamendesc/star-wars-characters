@@ -1,9 +1,9 @@
-import React, { Suspense, useContext } from 'react';
-import { CharactersContext } from 'src/context/CharactersContext';
-import Dialog from 'src/components/Dialog/Dialog';
-import AlertIcon from 'src/assets/icons/alert';
-import Loader from 'src/components/Loader/Loader';
-import Pagination from 'src/components/Pagination/Pagination';
+import React, { Suspense, useContext } from "react";
+import { CharactersContext } from "src/context/CharactersContext";
+import Dialog from "src/components/Dialog/Dialog";
+import AlertIcon from "src/assets/icons/alert";
+import Loader from "src/components/Loader/Loader";
+import Pagination from "src/components/Pagination/Pagination";
 
 export default function Table() {
   const { handleSearchChange, response, characters, isOpened, setIsOpened } =
@@ -12,7 +12,7 @@ export default function Table() {
   function handleCloseDialog() {
     setIsOpened(false);
     handleSearchChange({
-      target: { value: '' },
+      target: { value: "" },
     } as React.ChangeEvent<HTMLInputElement>);
   }
 
@@ -48,14 +48,14 @@ export default function Table() {
               <Suspense fallback={<Loader />}>
                 {characters?.map((character) => (
                   <tr key={character.name} className="hover:bg-slate-600">
-                    <td>{character.name || 'Not informed'}</td>
-                    <td>{character.birth_year || 'Not informed'}</td>
-                    <td>{character.gender || 'Not informed'}</td>
-                    <td>{character.height || 'Not informed'}</td>
-                    <td>{character.mass || 'Not informed'}</td>
-                    <td>{character.skin_color || 'Not informed'}</td>
-                    <td>{character.eye_color || 'Not informed'}</td>
-                    <td>{character.hair_color || 'Not informed'}</td>
+                    <td>{character.name || "Not informed"}</td>
+                    <td>{character.birth_year || "Not informed"}</td>
+                    <td>{character.gender || "Not informed"}</td>
+                    <td>{character.height || "Not informed"}</td>
+                    <td>{character.mass || "Not informed"}</td>
+                    <td>{character.skin_color || "Not informed"}</td>
+                    <td>{character.eye_color || "Not informed"}</td>
+                    <td>{character.hair_color || "Not informed"}</td>
                   </tr>
                 ))}
               </Suspense>

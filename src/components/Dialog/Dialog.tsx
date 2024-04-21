@@ -1,9 +1,9 @@
-import React, { useContext } from 'react';
-import { RemoveScroll } from 'react-remove-scroll';
-import { createPortal } from 'react-dom';
-import { CharactersContext } from 'src/context/CharactersContext';
-import CloseIcon from 'src/assets/icons/close';
-import VisuallyHidden from 'src/components/VisuallyHidden/VisuallyHidden';
+import React, { useContext } from "react";
+import { RemoveScroll } from "react-remove-scroll";
+import { createPortal } from "react-dom";
+import { CharactersContext } from "src/context/CharactersContext";
+import CloseIcon from "src/assets/icons/close";
+import VisuallyHidden from "src/components/VisuallyHidden/VisuallyHidden";
 
 const Dialog = ({
   children,
@@ -17,7 +17,7 @@ const Dialog = ({
   useEscapeKey(onClose);
 
   function handleKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
-    if (event.code === 'Escape') {
+    if (event.code === "Escape") {
       resetTable();
       onClose();
     }
@@ -40,10 +40,10 @@ const Dialog = ({
     };
   }, []);
 
-  const modalRoot = document.querySelector('#modal-root');
+  const modalRoot = document.querySelector("#modal-root");
 
   if (!modalRoot) {
-    console.error('Modal root element not found');
+    console.error("Modal root element not found");
     return null; // or handle this case appropriately
   }
 
@@ -83,15 +83,15 @@ const Dialog = ({
 function useEscapeKey(callback: () => void) {
   React.useEffect(() => {
     function handleKeyDown(event: KeyboardEvent) {
-      if (event.code === 'Escape') {
+      if (event.code === "Escape") {
         callback();
       }
     }
 
-    window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener("keydown", handleKeyDown);
 
     return () => {
-      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener("keydown", handleKeyDown);
     };
   }, [callback]);
 }

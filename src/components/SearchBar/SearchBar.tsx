@@ -1,14 +1,14 @@
-import React, { useContext } from 'react';
-import { CharactersContext } from 'src/context/CharactersContext';
-import Button from 'src/components/Button/Button';
-import SearchIcon from 'src/assets/icons/search';
+import React, { useContext } from "react";
+import { CharactersContext } from "src/context/CharactersContext";
+import Button from "src/components/Button/Button";
+import SearchIcon from "src/assets/icons/search";
 
 export default function SearchBar() {
   const { searchTerm, handleSearchChange, handleCharacterSearch } =
     useContext(CharactersContext);
 
   function handleSearchKeyUp(e: React.KeyboardEvent<HTMLInputElement>) {
-    if (e.key === 'Enter') {
+    if (e.key === "Enter") {
       handleCharacterSearch();
     }
   }

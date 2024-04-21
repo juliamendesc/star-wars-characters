@@ -24,7 +24,7 @@ export type API_Response = {
 export type CharactersContextProps = {
   response: API_Response;
   searchTerm: string;
-  characters: API_Response['results'];
+  characters: API_Response["results"];
   setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
   handleSearchChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleCharacterSearch: () => void;
